@@ -149,6 +149,7 @@ contract Crowdsale is Ownable, BosonApproved {
             tokens = tokensLeft;
         }
 
+        // Note down the purchase.
         tokensLeft.sub(tokens);
 
         // Check if crowdsale is done.
@@ -156,8 +157,20 @@ contract Crowdsale is Ownable, BosonApproved {
             nextState(State.Finished);
         }
 
+        // See if we need to send a refund. This comes when we sell less tokens
+        // than their value in Ether, which can happen when:
+        //  - we can't sell as many tokens as the buyer requested, because we
+        //    ran out of them
+        //  - the buyer send ether that cannot buy an entire token (ie. we
+        //    we refund the modulo of the price division)
+        uint256 refund = msg.value.sub(tokens.mul(price()));
+
         // Send tokens to buyer.
         require(token.transfer(buyer, tokens));
+        // Send refund to buyer, if necessary.
+        if (refund > 0) {
+            msg.sender.transfer(refund);
+        }
     }
 }
 

@@ -7,6 +7,7 @@ let GetToken = artifacts.require('GetToken');
 let TestBosonResolver = artifacts.require('TestBosonAddressResolver');
 let TestBoson = artifacts.require('TestBoson');
 
+
 class TestBosonRunner {
     constructor() {
         this.trusted = new Set();
@@ -56,6 +57,44 @@ class TestBosonRunner {
     }
 }
 
+// Get Ether balance of a given account. Why does this not exist in
+// truffle-contract?
+async function getBalance(account) {
+    return new Promise((resolve, reject) => {
+        // Ugh.
+        const web3 = Crowdsale.web3;
+        web3.eth.getBalance(account, (error, balance) => {
+            if (error) {
+                reject(error);
+            } else {
+                resolve(balance);
+            }
+        });
+    });
+}
+
+// Calculate the price we paid in ethers for a given transaction receipt.
+async function gasUsedPrice(receipt) {
+    const gasUsed = receipt.gasUsed;
+    const transaction = await new Promise((resolve, reject) => {
+        const web3 = Crowdsale.web3;
+        web3.eth.getTransaction(receipt.transactionHash, (error, result) => {
+            if (error) {
+                reject(error);
+            } else {
+                resolve(result);
+            }
+        });
+    });
+    const gasPrice = transaction.gasPrice;
+    return gasPrice.mul(gasUsed);
+}
+
+// Assert that two big numbers are equal, provide descriptive error message if
+// not.
+function assertEq(got, want, msg) {
+    assert(got.eq(want), `${msg} (got: ${got.toString()}, want: ${want.toString()})`);
+}
 
 
 contract('Treasurer', (accounts) => {
@@ -151,9 +190,35 @@ contract('Crowdsale', (accounts) => {
         let wei = 1 * ether;
         let tokens = wei / price.toNumber();
 
-        assert.equal((await token.balanceOf.call(buyer)).valueOf(), 0, "buyer owns some tokens already");
-        await crowdsale.buy.sendTransaction(buyer, {value: 1 * ether});
-        assert.equal((await token.balanceOf.call(buyer)).valueOf(), tokens, "buyer didn't receive expected amount of tokens");
+        const startTokenBalance = (await token.balanceOf.call(buyer));
+        const startEtherBalance = await getBalance(accounts[0]);
+
+        const tx = await crowdsale.buy(buyer, {value: 1 * ether});
+        const gasUsed = await gasUsedPrice(tx.receipt);
+
+        const endTokenBalance = (await token.balanceOf.call(buyer));
+        const endEtherBalance = await getBalance(accounts[0]);
+
+        assertEq(endTokenBalance, startTokenBalance.add(tokens), "buyer didn't receive expected amount of token");
+        assertEq(endEtherBalance, startEtherBalance.sub(1 * ether).sub(gasUsed), "buyer didn't get charged correctly");
+    });
+
+    it("should refund unspent ether", async() => {
+        let buyer = accounts[2];
+        let price = (await crowdsale.price.call()).toNumber();
+        const eths = price * 3.5;
+
+        const startTokenBalance = await token.balanceOf.call(buyer);
+        const startEtherBalance = await getBalance(accounts[0]);
+
+        const tx = await crowdsale.buy(buyer, {value: eths});
+        const gasUsed = await gasUsedPrice(tx.receipt);
+
+        const endTokenBalance = await token.balanceOf.call(buyer);
+        const endEtherBalance = await getBalance(accounts[0]);
+
+        assertEq(endTokenBalance, startTokenBalance.add(3), "buyer didn't receive expected amount of tokens");
+        assertEq(endEtherBalance, startEtherBalance.sub(3 * price).sub(gasUsed), "buyer didn't get charged correctly");
     });
 
     after(() => {
