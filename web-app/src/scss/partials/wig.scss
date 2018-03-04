@@ -1,0 +1,166 @@
+.wig {
+  padding: 150px 0 130px;
+  overflow: hidden;
+  @include smMin {
+    padding: 200px 0;
+  }
+  @include lgMin {
+    padding: 197px 0;
+  }
+}
+
+.wig__title {
+  @include lgMin {
+    margin-left: 35px;
+  }
+}
+
+.wig__desc,
+.wig__btns {
+  @include lgMin {
+    margin-left: 16px;
+  }
+}
+
+.wig__btns {
+  clear: both;
+  display: block;
+  padding-top: 32px;
+
+  .btn {
+    display: inline-block;
+    float: left;
+    width: calc(50% - 5px);
+    &:nth-child(2n) {
+      float: right;
+    }
+  }
+}
+
+.wig__shapes {
+  position: absolute;
+  left: 0;
+  z-index: 10;
+
+  @include smMin {
+    top: -30px;
+  }
+
+  @include lgMin {
+    left: -140px;
+    top: -200px;
+  }
+
+  .wig__circle {
+    transition: all 1s ease;
+    transform: translateY(50px) rotate(23deg);
+  }
+  .wig__purple {
+    transition: all .7s ease;
+    transform: translateY(-70px);
+  }
+  .wig__black {
+    transition: all .7s ease;
+    transform: translateY(70px);
+  }
+  &.aos-animate {
+    .wig__circle { transform: translateY(0) rotate(23deg); }
+    .wig__purple { transform: translateY(0); }
+    .wig__black { transform: translateY(0); }
+  }
+}
+.wig__circle {
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  overflow: hidden;
+  background: image_url('waves-small.png') repeat 0 0;
+  margin-bottom: 50px;
+  position: relative;
+  z-index: 1;
+  left: -120px;
+  display: none;
+
+  @include smMin {
+    width: 414px;
+    height: 414px;
+    display: block;
+  }
+}
+
+@keyframes wigpurpleAnim {
+  0% { border-radius: 102px 28px;}
+  50% { border-radius: 28px 102px; }
+  100% { border-radius: 102px 28px;}
+}
+.wig__purple {
+  position: absolute;
+  background: #7249F7;
+  z-index: 3;
+  display: none;
+  width: 130px;
+  height: 140px;
+  left: 80px;
+  border-radius: 102px 28px;
+  // animation: wigpurpleAnim 10s linear infinite;
+
+
+  @include smMin {
+    display: block;
+    top: 230px;
+    left: -56px;
+    width: 188px;
+    height: 187px;
+    border-radius: 102px 28px;
+  }
+
+  @include lgMin {
+    top: 290px;
+  }
+}
+
+.wig__black {
+  position: absolute;
+  top: 260px;
+  right: 30px;
+  width: 70px;
+  height: 80px;  
+  background: $color-black-cod;
+  border-radius: 10px 40px;
+  z-index: 2;
+  display: none;
+
+  @include smMin {
+    display: block;
+    top: 305px;
+    right: 230px;
+    width: 82px;
+    height: 89px;
+  }
+
+  @include lgMin {
+    top: 405px;
+  }
+}
+.wig__col {
+  position: relative;
+}
+.wig__line {
+  position: absolute;
+  bottom: -100px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: #e3e3e3;
+  display: block;
+  transition: all .3s ease;
+
+  @include lgMin {
+    left: 31px;
+    bottom: -160px;
+  }
+
+  &.aos-animate {
+    width: 9999px;
+  }
+}

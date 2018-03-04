@@ -1,0 +1,103 @@
+body.modal-open {
+  overflow: hidden;
+  padding-right: 18px;
+}
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  opacity: 0.5;
+  background-color: rgba($color-white, .5);
+  z-index: 2000;
+  opacity: 0;
+  visibility: hidden;
+  overflow-y: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all .35s ease;
+
+
+  &.is-active {
+    opacity: 1;
+    visibility: visible;
+    .modal {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0px);
+    }
+  }
+}
+
+.modal {
+  width: 100%;
+  max-width: 560px;
+  border-radius: 3px;
+  background-color: $color-white;
+  box-shadow: 0 8px 26px 0 rgba(0, 0, 0, 0.08);
+  position: absolute;
+  padding: 60px 50px;
+  margin: 100px 0;
+  z-index: 2001;
+  transition: all .3s ease .3s;
+  transform: translateY(50px);
+  opacity: 0;
+  visibility: hidden;
+  svg {
+    fill: #bbbbbb;
+    transition: all .3s ease;
+  }
+  @include smMin {
+    margin: 0;
+  }
+
+  &:hover {
+    svg {
+      fill: $color-purpleish-blue;
+    }
+  }
+}
+
+.modal__close {
+  position: absolute;
+  right: 20px;
+  top: 20px;
+  width: 24px;
+  height: 24px;
+  border-radius: 3px;
+  background-color: #f2f2f2;
+  border: 0;
+  outline: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  svg {
+    width: 12px;
+    height: 12px;
+  }
+}
+
+.modal__title {
+  font-size: 3.2rem;
+  font-weight: 300;
+  letter-spacing: -0.3px;
+  text-align: left;
+  color: #121f4e;
+
+  span {
+    display: block;
+    font-size: 11px;
+    color: #7249f7;
+    font-weight: 500;
+  }
+}
+
+.modal__desc {
+  font-size: 1.3rem;
+  font-weight: 300;
+  line-height: 1.85;
+  text-align: left;
+  color: #858585;
+}

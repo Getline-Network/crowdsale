@@ -1,0 +1,86 @@
+.supporter {
+  background: #fafafa;
+  padding: 60px 0;
+  position: relative;
+
+  @include xsMax {
+    &:after {
+      content: '';
+      width: 100%;
+      height: 30px;
+      display: block;
+      background: $color-white;
+      position: absolute;
+      top: 50%;
+      left: 0;
+      right: 0;
+      margin-top: -15px;
+      transition: all .9s ease;
+    }
+  }
+
+  @include smMin {
+    padding: 150px 0;
+    &:after {
+      content: '';
+      width: 100%;
+      height: 100%;
+      display: block;
+      background: $color-white;
+      position: absolute;
+      top: 0;
+      left: 0;
+      margin-left: -15px;
+      transition: all .9s ease;
+    }
+    &:before {
+      content: '';
+      width: 721px; 
+      height: 159px;
+      background: image_url('waves_supporter.png') no-repeat 0 0;
+      position: absolute;
+      bottom: -159px;
+      left: 80%;
+      display: block;
+      opacity: 0;
+      transition: all .8s ease;
+    }
+  }
+  &.aos-animate {
+    &:after {
+      left: 50%;
+      width: 30px;
+      @include xsMax {
+        width: 100%;
+        left: 0;
+      }
+    }
+    &:before {
+      left: 60%;
+      opacity: 1;
+    }
+  }
+}
+
+.supporter__title {
+  font-size: 2.7rem;
+  line-height: 3.5rem;
+  &.second {
+    margin-top: 50px;
+    @include xsMax {
+      margin-top: 100px;
+    }
+  }
+  @include smMin {
+    font-size: 2.8rem;
+    line-height: 3.8rem;
+    &.second {margin-top: 0;}
+  }
+  @include lgMin {
+    font-size: 3.7rem;
+    line-height: 4.7rem;
+    &.second {
+      margin-top: 10px;
+    }
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "name": "testy",
+  "version": "1.0.0",
+  "description": "",
+  "main": "gulpfile.js",
+  "dependencies": {
+    "gulp-haml": "^0.1.6"
+  },
+  "devDependencies": {
+    "beepbeep": "^1.2.1",
+    "browser-sync": "^2.18.7",
+    "gulp": "^3.9.1",
+    "gulp-autoprefixer": "^3.1.1",
+    "gulp-concat": "^2.6.1",
+    "gulp-connect": "^5.0.0",
+    "gulp-cssnano": "^2.1.2",
+    "gulp-file-include": "^1.1.0",
+    "gulp-group-css-media-queries": "^1.2.0",
+    "gulp-plumber": "^1.1.0",
+    "gulp-postcss": "^6.3.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-sass": "^3.1.0",
+    "gulp-uglify": "^2.0.1"
+  },
+  "scripts": {
+    "test": "test"
+  },
+  "author": "Maxlin",
+  "license": "MIT"
+}

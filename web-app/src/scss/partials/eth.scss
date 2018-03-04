@@ -1,0 +1,74 @@
+.eth {
+  padding: 50px 0 0;
+  background-color: #f9f9f9;
+
+  @include smMin {
+    padding: 100px 0;
+  }
+
+  @include lgMin {
+    padding: 205px 0 235px;
+  }
+}
+
+.eth__image {
+  margin-left: -10px;
+  margin-bottom: 20px;
+
+  @include smOnly {
+    width: 100px;
+  }
+}
+
+.eth__right {
+  position: relative;
+}
+
+.eth__macbook {
+  position: relative;
+  z-index: 2;
+  width: 400px;
+  margin-top: 50px;
+  @include xsMax {
+    width: 648px;
+    margin-bottom: -130px;    
+  }
+  @include smMin {
+    margin-top: 130px;
+  }
+  @include mdMin {
+    width: 600px;
+  }
+  @include lgMin {
+    width: auto;
+    position: absolute;
+    margin-top: 0;
+    left: -28px;
+    top: 97px;
+  }
+}
+
+.eth__bg {
+  position: absolute;
+  top: 50px;
+  left: 0;
+  width: 300px;
+  z-index: 1;
+  @include xsMax {
+    top: 100px;
+  }
+  @include smMin {
+    width: 500px;
+    top: 40px;
+  }
+  @include mdMin {
+    width: 700px;
+    top: 10px;
+    left: 20px;
+  }
+  @include lgMin {
+    width: auto;
+    top: -70px;
+    left: 30px;
+  }
+}

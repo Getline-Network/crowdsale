@@ -1,0 +1,186 @@
+.roadmap {
+  padding: 60px 0 0;
+
+  @include smMin {
+    padding: 150px 0 65px;
+  }
+}
+
+.roadmap__timeline {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+
+  span {
+    font-size: 1.4rem;
+    font-weight: 500;
+    text-align: left;
+    color: $color-black-cod;
+  }
+
+  p {
+    font-size: 1.8rem;
+    line-height: 1.56;
+    text-align: left;
+    color: #858585;
+    margin-top: 40px;
+    max-width: 305px;
+
+    @include xsMax {
+      font-size: 1.6rem;
+    }
+  }
+
+  li {
+    display: block;
+    position: relative;
+    margin-bottom: 37px;
+    width: 100%;
+    &:before {
+      content: '';
+      position: absolute;
+      display: block;
+      width: 44px;
+      height: 20px;
+      background: image_url('svg/ic-calendar.svg') no-repeat 0 0;
+      left: -35px;
+      top: 28px;
+      background-size: 100% 100%;
+      z-index: 2;
+    }
+    &:after {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 38px;
+      width: calc(100% - 50px);
+      height: 2px;
+      background: $color-black-cod;
+      display: block;
+    }
+    &:nth-child(2n+3) span {
+      &:after {
+        content: '';
+        position: absolute;
+        right: calc(100% + 52px);
+        top: 38px;
+        width: 9999px;
+        height: 2px;
+        background: $color-black-cod;
+        display: block;
+      }
+    }
+    &:last-child {
+      @include xsMax {
+        margin-bottom: 0px;
+      }
+      span {
+        &:after {
+          content: '';
+          position: absolute;
+          width: 16px;
+          height: 16px;
+          background: image_url('svg/ic-arrow-big-right.svg') no-repeat 0 0;
+          background-size: 100% 100%;
+          top: 31px;
+          left: 82%;
+          @include smMin {
+            left: 300px;
+          }
+        }
+      }
+    }
+    @include xsMax {
+      p,
+      span {
+        padding-left: 35px;
+      }
+      &:before {
+        left: 3px;
+      }
+      &:after {
+        left: 36px;
+        width: 9999px;
+      }
+      &:last-child:after {
+        width: 74%;
+      }
+    }
+    @include smMin {
+      width: 50%;
+
+      &:nth-child(2n):after {
+        width: 9999px;
+      }
+      &:last-child:after {
+        width: 300px;
+      }
+    }
+  }
+
+  @include smMin {
+    margin-top: 76px;
+  }
+}
+
+.roadmap__final {
+  margin: 25px -15px;
+  border-radius: 3px;
+  background-color: $color-black-cod;
+  padding: 40px 30px;
+  text-align: center;
+  font-size: 2.2rem;
+  text-align: center;
+  color: $color-white;
+  position: relative;
+  @include xsMax {
+    margin: 25px 0;
+  }
+  span {
+    display: block;
+    opacity: 0.4;
+    font-size: 1.6rem;
+  }
+  &:after {
+    content: '';
+    position: absolute;
+    background: image_url('svg/ic-arrow-big-right-white.svg') no-repeat 0 0;
+    width: 135px;
+    height: 135px;
+    display: block;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    opacity: .05;
+  }
+  &:before {
+    content: '';
+    position: absolute;
+    background: image_url('svg/ic-calendar-white.svg') no-repeat 0 0;
+    width: 160px;
+    height: 160px;
+    display: block;
+    left: 60%;
+    top: 50%;
+    transform: translateY(-50%);
+    display: none;
+  }
+
+  @include smMin {
+    padding: 78px 30px;
+    font-size: 2.6rem;
+    &:before {
+      display: block;
+    }
+    span {
+      font-size: 2rem;
+    }
+  }
+
+  @include mdMin {
+    margin-left: -45px;
+    margin-right: -45px;
+  }
+}

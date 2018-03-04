@@ -1,0 +1,58 @@
+.footer {
+  .container {
+    position: relative;
+    padding: 60px 0;
+  }
+  .hero__social {
+    width: 46px;
+    height: 46px;
+    box-shadow: none;
+    border: 1px solid #ebebeb;
+    svg {
+      height: 14px;
+    }
+
+    &:hover {
+      border-color: transparent;
+    }
+  }
+
+  @include xsMax {
+    text-align: center;
+  }
+}
+.footer__desc {
+  font-size: 1.2rem;
+  font-weight: 300;
+  line-height: 1.83;
+  color: #606060;
+  margin: 0;
+}
+.footer .container:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: #ebebeb;
+  display: block;
+
+  @include smMin {
+    left: -45px;
+    right: -45px;
+  }
+
+  @include lgMin {
+    left: -90px;
+    right: -90px;
+  }
+}
+
+.footer__social {
+  margin: 15px 0 0 0;
+  @include smMin {
+    margin: 0;
+    text-align: right;
+  }
+}

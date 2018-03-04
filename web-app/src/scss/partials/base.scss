@@ -1,0 +1,218 @@
+body,html {
+  font-family: 'Montserrat', Helvetica, Tahoma, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-size: $base-font-size;
+}
+
+body {
+  background: $color-white;
+  color: $color-black-cod;
+  font-weight: 400;
+
+  &.modal-show {
+    overflow: hidden;
+  }
+}
+
+.wrapper {
+  overflow: hidden;
+  display: block;
+  clear: both;
+  &:before {
+    content: '';
+    display: table;
+    clear: both;
+  }
+}
+
+
+::selection {
+  background: $color-blurple;
+  color: $color-white
+}
+
+// Mixin
+
+@function image_url($content){
+  @return url("../images/" + $content)
+}
+
+@mixin retina {
+  @media
+    only screen and (-webkit-min-device-pixel-ratio: 2),
+    only screen and (min--moz-device-pixel-ratio: 2),
+    only screen and (-o-min-device-pixel-ratio: 2/1),
+    only screen and (min-device-pixel-ratio: 2),
+    only screen and (min-resolution: 192dpi),
+    only screen and (min-resolution: 2dppx) {
+    @content;
+  }
+}
+
+@include xsMax {
+  video { display: none; }
+  .left-column,
+  .right-column,
+  .g-center, {
+    float: none;
+    max-width: 470px;
+    margin: 0 auto;
+  }
+  .g-desc.--logotypes {
+    max-width: 470px;
+  }
+  .container {
+    padding: 0 10px;
+    .row {
+      margin: 0 -10px;
+    }
+  }
+}
+
+.visible-xs {
+  display: block;
+  @include smMin {
+    display: none;
+  }
+}
+.hidden-xs {
+  display: none;
+  @include smMin {
+    display: block;
+  }
+}
+.text-center {
+  text-align: center;
+}
+.right-column {
+  @include lgMin {
+    padding-left: 45px;
+  }
+}
+.g-title__big {
+  font-size: 4rem;
+  font-weight: 200;
+  color: $color-black-cod;
+  letter-spacing: -0.7px;
+  margin: 0;
+
+  @include smMin {
+    font-size: 5.4rem;
+    margin: 0 0 10px 0;
+  }
+}
+.g-title {
+  font-weight: 200;
+  font-size: 3.2rem;
+  line-height: 4rem;
+  letter-spacing: -0.3px;
+  color: $color-black-cod;
+  margin: 0 0 21px;
+
+  &.white {
+    color: $color-white;
+  }
+  .mini {
+    font-size: 1.3rem;
+    font-weight: 300;
+    color: $color-greyish;
+    text-transform: uppercase;
+    + p span {
+      transition-delay: .4s;
+    }
+    @include xsMax {
+      line-height: 2rem;
+    }
+  }
+  .subtitle {
+    font-size: 2.6rem;
+    line-height: 3rem;
+    font-weight: 200;
+    letter-spacing: -0.3px;
+    text-align: left;
+    color: #858585;
+    margin-top: 6px;
+  }
+
+  @include smMin {
+    font-size: 4rem;
+    line-height: 1.11;
+    .mini {
+      font-size: 1.6rem;
+    }
+    .subtitle {
+      font-size: 2.8rem;
+      line-height: 3.4rem;
+    }
+  }
+  @include lgMin {
+    font-size: 4.6rem;
+    line-height: 1.25;
+
+    .subtitle {
+      font-size: 3.6rem;
+      line-height: 4rem;
+    }
+  }
+}
+.g-subtitle {
+  font-size: 2.4rem;
+  line-height: 1.36;
+  font-weight: 200;
+  letter-spacing: -0.3px;
+  text-align: left;
+  color: #858585;
+  margin: -9px 0 30px;
+
+  @include smMin {
+    font-size: 2.8rem;
+    line-height: 1.36;
+    margin: -3px 0 30px;
+  }
+}
+
+.g-desc {
+  font-size: 1.5rem;
+  line-height: 1.6;
+  color: $color-grey-warm;
+  font-weight: 300;
+  max-width: 460px;
+  margin: 9px 0;
+
+  &.white {
+    color: $color-greyish;
+  }
+}
+
+.sliding-txt {
+  p {
+    overflow: hidden;
+    display: block;
+    margin: 0;
+  }
+  span,
+  strong {
+    position: relative;
+    display: block;
+    transform: translateY(-130px);
+    transition: all .35s ease;
+  }
+  strong {
+    transition-delay: .3s;
+  }
+  .subtitle span {
+    transition-delay: .2s;
+  }
+
+  &.aos-animate {
+    span,
+    strong {
+      transform: translateY(0);
+    }
+  }
+}
+
+.text-right {
+  text-align: right;
+}
